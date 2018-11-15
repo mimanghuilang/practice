@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style type="text/css" media="screen">
+    h1,h2{
+        font-weight: normal;
+    }
+    #queue-items{
+        height: 1.5em;
+    }
+    #add-stuff{
+        padding: 0.5em;
+        background: #ddd;
+        border: 1px solid #bbb;
+    }
+    #results-area{
+        padding: 0.5em;
+        border: 1px solid #bbb;
+    }
+</style>
+<body id="example" onload="init()">
+<div id="doc">
+    <h1>Ajax Connection Queue</h1>
+    <div id="queue-items"></div>
+    <div id="add-stuff">
+        <h2>Add Requests to Queue (adders)</h2>
+        <ul id="adders">
+            <li><a href="#" id="action-o1">添加到 o1 序列</a></li>
+            <li><a href="#" id="action-o2">添加到 o2 序列</a></li>
+            <li><a href="#" id="action-o3">添加到 o3 序列</a></li>
+        </ul>
+    </div>
+    <h2>other Queue Actions (items)</h2>
+    <ul id="items">
+        <li><a href="#" id="flush">刷新执行</a></li>
+        <li><a href="#" id="dequeue">移除</a></li>
+        <li><a href="#" id="pause">停顿</a></li>
+        <li><a href="#" id="clear">清空</a></li>
+    </ul>
+    <div id="results-area">
+        <h2>Results:</h2>
+        <div id="results"></div>
+    </div>
+</div>
+<script type="text/javascript" src="library.js"></script>
+<script type="text/javascript" src="asyncRequest.js"></script>
+<script type="text/javascript" src="DED.js"></script>
+<script type="text/javascript">
+    function init() {
+        //定义一个序列
+        var q=new DED.Queue();
+        //设置执行次数
+        q.setRetryCount(5);
+        //超时时间
+        q.setTimeout(3000);
+        //获得页面节点
+        var items=document.getElementById('items');
+        var results=document.getElementById('results');
+        var queue=document.getElementById('queue-items');
+
+        //跟踪自己请求的客户端
+        var requests=[];
+
+        //通知每个请求被刷新
+        q.onFlush.subscribe(function (data) {
+            requests.innerHTML=data;
+            requests.shift();
+            queue.innerHTML=requests.toString();
+        });
+        //对于任何失败通知
+        q.onFailure.subscribe(function () {
+            results.innerHTML+="<span style='color: red;'>Connection Error!</span>"
+        });
+        //通知的完成状态
+        q.onComplete.subscribe(function () {
+            results.innerHTML+="<span style='color: green'>Complete!</span>"
+        });
+
+        /**
+         * 每次直接操作序列通过桥梁来完成
+         * 桥梁函数
+         * @param{}element
+         * @return {}
+         */
+        var actionDispatcher=function (element) {
+            switch (element){
+                case 'flush':
+                    //刷新
+                    q.flush();
+                    break;
+                case "dequeue":
+                    //移除
+                    q.dequeue();
+                    requests.pop();
+                    queue.innerHTML=requests.toString();
+                    break;
+                case "pause":
+                    //暂停
+                    q.pause();
+                    break;
+                case "clear":
+                    //清空
+                    q.clear();
+                    requests=[];
+                    queue.innerHTML='';
+                    break;
+            }
+        };
+
+
+        //添加请求
+        var addRequest=function (request) {
+            var data=request.split("-")[1];
+            q.add({
+                method:"GET",
+                uri:"haha.php",
+                params:null
+            });
+            requests.push(data);
+            queue.innerHTML=requests.toString();
+        };
+
+        addEvent(items,'click',function (e) {
+            var  e=e||window.event;
+            var src=e.target||e.srcElement;
+            try{
+                e.preventDefault();
+            }
+            catch (e){
+                e.returnValue=false;
+            }
+            actionDispatcher(src.id);
+        });
+
+
+        var adders=document.getElementById("adders");
+        addEvent(adders,'click',function (e) {
+            var e=e||window.event;
+            var src=e.target||e.srcElement;
+            try{
+                e.preventDefault();
+            }
+            catch (e){
+                e.returnValue=false;
+            }
+            addRequest(src.id);
+        })
+
+    }
+</script>
+</body>
+</html>
