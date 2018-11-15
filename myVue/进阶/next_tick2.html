@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+<div id="example">
+    <example></example>
+</div>
+<script>
+    Vue.component('example', {
+        template: '<span v-on:click="updateMessage">{{ message }}</span>',
+        data: function () {
+            return {
+                message: '没有更新'
+            }
+        },
+        methods: {
+            updateMessage: function () {
+                this.message = '更新完成';
+                console.log(this.$el.textContent); // => '没有更新'
+                this.$nextTick(function () {
+                    console.log(this.$el.textContent);// => '更新完成'
+                })
+            }
+        }
+    });
+    var vm = new Vue({
+        el: '#example',
+        data: {
+            message: '123'
+        }
+    })
+</script>
+</body>
+</html>

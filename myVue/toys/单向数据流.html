@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <child v-bind:message="message"></child>
+</div>
+
+
+<script>
+    // 注册
+    Vue.component('child', {
+        // 声明 props
+        props: ['message'],
+        // 同样也可以在 vm 实例中像 "this.message" 这样使用
+        template: '<span v-on:click="haha">{{ selfMessage }}</span>',
+        data:function(){
+            return {
+                selfMessage:this.message
+            }
+        },
+        methods: {
+            haha: function () {
+                this.selfMessage = this.selfMessage.slice(1);
+            }
+        }
+    });
+    // 创建根实例
+    var app=new Vue({
+        el: '#app',
+        data:{
+            message:"hello!"
+        }
+    });
+
+</script>
+</body>
+</html>

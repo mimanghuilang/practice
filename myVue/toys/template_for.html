@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>template_for</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+<!--<div id="app">-->
+    <!--<ul>-->
+        <!--<template v-for="site in sites">-->
+            <!--<li>{{ item.name }}</li>-->
+            <!--<li>&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</li>-->
+        <!--</template>-->
+    <!--</ul>-->
+<!--</div>-->
+<!--<script>-->
+    <!--new Vue({-->
+        <!--el: '#app',-->
+        <!--data: {-->
+            <!--sites: [-->
+                <!--{ name: 'Runoob' },-->
+                <!--{ name: 'Google' },-->
+                <!--{ name: 'Taobao' }-->
+            <!--]-->
+        <!--}-->
+    <!--})-->
+<!--</script>-->
+
+
+
+<div id="app">
+    <ul>
+        <template v-for="site in sites">
+            <li>{{ site.name }}</li>
+            <li>--------------</li>
+        </template>
+    </ul>
+</div>
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            sites: [
+                { name: 'Runoob' },
+                { name: 'Google' },
+                { name: 'Taobao' }
+            ]
+        }
+    })
+</script>
+</body>
+</html>

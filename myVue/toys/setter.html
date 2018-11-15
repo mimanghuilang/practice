@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>setter</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <div>{{firstName}}</div>
+    <div>{{lastName}}</div>
+    <div>{{ computedfullName }}</div>
+</div>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            firstName: 'Foo',
+            lastName: 'Bar',
+            fullName: 'Foo Bar'
+        },
+        watch: {},
+        computed: {
+            computedfullName: {
+                get: function () {
+                    return this.firstName + ' ' + this.lastName
+                },
+                set: function (newValue) {
+                    var names = newValue.split(' ');
+                    this.firstName = names[0];
+                    this.lastName = names[names.length - 1]
+                }
+            }
+        }
+    });
+    app.computedfullName="bluce li"
+</script>
+</body>
+</html>

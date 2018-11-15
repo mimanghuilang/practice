@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <div v-for="(value, key, index) in object">
+        {{ index }}. {{ key }} : {{ value }}
+    </div>
+</div>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            object: {
+                FirstName: 'John',
+                LastName: 'Doe',
+                Age: 30
+            }
+        }
+    })
+</script>
+</body>
+</html>

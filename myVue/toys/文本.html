@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>文本</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+<h1>多次</h1>
+<div id="app">
+    <div  style="font-size: 48px;line-height: 2.4;background: red">
+        {{ message }}
+    </div>
+    <h1>一次</h1>
+    <div style="font-size: 48px;line-height: 2.4;background: blue" v-once>{{message}}</div>
+</div>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            message: '<p>Hello World!</p>'
+        }
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>属性</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+<body>
+<div id="app">
+    <button v-bind:disabled="disableValue" v-on:click="click_me">click Me</button>
+</div>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello World!',
+            rawHtml:"<h1>这里的世界很精彩！</h1>",
+            disableValue:false
+        },
+        methods: {
+            click_me: function () {
+                this.disableValue = !this.disableValue;
+                alert("点我");
+            }
+        }
+    });
+</script>
+</body>
+</html>

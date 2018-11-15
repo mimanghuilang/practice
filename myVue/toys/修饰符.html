@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>修饰符</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <form v-on:submit.prevent="onSubmit"  action="haha.php"  method="POST">
+        <input type="text" placeholder="请输入你的姓名" name="name">
+    </form>
+</div>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello World!',
+            rawHtml:"<h1>这里的世界很精彩！</h1>"
+        },
+        methods:{
+            onSubmit:function () {
+                alert("用ajax提交吧")
+            }
+        }
+    });
+</script>
+</body>
+</html>

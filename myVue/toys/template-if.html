@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>模板中if</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <p v-if="seen">现在你看到我了</p>
+    <template v-if="ok">
+        <h1>菜鸟教程</h1>
+        <p>学的不仅是技术，更是梦想！</p>
+        <p>哈哈啥，打字辛苦啊！！！</p>
+    </template>
+</div>
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            seen: true,
+            ok: true
+        }
+    })
+</script>
+
+
+<!--&lt;!&ndash; 父组件模板 &ndash;&gt;-->
+<!--<div id="exampleBox2"  style="border:1px solid #ccc;width:500px;">-->
+    <!--<div>{{parent.name}}</div>-->
+    <!--&lt;!&ndash;模版挂载标识&ndash;&gt;-->
+    <!--<children></children>-->
+<!--</div>-->
+<!--&lt;!&ndash; 子组件模板 &ndash;&gt;-->
+<!--<template id="child-template">-->
+    <!--<p style="background:#eee;" v-if="ok">{{text}}</p>-->
+<!--</template>-->
+<!--<script>-->
+    <!--Vue.component('children', {//child是模版挂载的标签名-->
+        <!--template: '#child-template',//id对应子组件的ID-->
+        <!--data: function () {-->
+            <!--return {-->
+                <!--text: '这里是子组件的内容',-->
+                <!--ok:true-->
+            <!--}-->
+        <!--}-->
+    <!--});-->
+    <!--var parent = new Vue({// 初始化父组件-->
+        <!--el: '#exampleBox2',-->
+        <!--data: {-->
+            <!--parent: {-->
+                <!--name:'这里是父组件的内容'-->
+            <!--}-->
+        <!--}-->
+    <!--})-->
+<!--</script>-->
+</body>
+</html>

@@ -1,0 +1,191 @@
+对大小写不敏感
+
+//链接数据库
+
+
+// 查看/使用数据库
+show Databases;
+use myDatabase;
+
+//设置使用的字符集。
+set names utf8;
+
+//SELECT * FROM myDatabase;  读取数据表的信息
+
+//一些重要的命令
+1,提取
+select
+2,更新
+update
+3,删除
+delete
+4,插入
+insert into
+5,创建数据库
+create database
+6,修改数据库
+alter database
+7,创建新表
+create table
+8,变更数据库表
+alter table
+9,删除表
+drop table
+10,创建索引
+create index
+11,删除索引
+drop index
+
+//详细介绍
+1.1
+//普通通用
+select name,country from mydatabase
+Select * from mydatabase
+
+1.2
+条件筛选
+//distinct  语句用于返回唯一不同的值
+select distinct country from mydatabase
+
+//where
+select name from mydatabase where country="CN";
+
+//文本字段 vs 数值字段
+select * from mydatabase where id=1;
+
+//where子句中的运算符
+(=,>,<,>=,<=,between,link,in,!=,<>);
+select * from emp where empno=7900;
+select * from emp where ename='SMITH';
+
+1.3
+逻辑运算符
+and
+select * from emp where sal > 2000 and sal < 3000;
+or
+select * from emp where sal > 2000 or comm > 500;
+and 和 or
+select * from mydatabase where alexa > 15 and (country='CN' or country='USA');
+not
+select * from emp where not sal > 1500;
+逻辑运算的优先级：() not and or
+
+1.4
+特殊条件
+1，空值判断
+Select * from emp where comm is null;
+
+2，between and (在 之间的值)
+Select * from emp where sal between 1500 and 3000;
+
+3.In（查询 EMP 表 SAL 列中等于 5000，3000，1500 的值）
+Select * from emp where sal in (5000,3000,1500);
+
+4，like(模糊查询)；
+Select * from emp where ename like 'M%';
+ % 表示多个字值，_ 下划线表示一个字符；
+ M% : 为能配符，正则表达式，表示的意思为模糊查询信息为 M 开头的。
+ %M% : 表示查询包含M的所有内容。
+ %M_ : 表示查询以M在倒数第二位的所有内容。
+
+1.5 排序
+order by
+//语法,降序数desc,升序数asc
+select column_name,column_name from table_name order by column_name,column_name  ASC|DESC;
+select * from  mydatabase order by alexa asc;
+
+2.1
+update where慎重再慎重
+update table_name set column1=value1,column2=value2,... where some_column=some_value;
+例如：update mydatabase  set alexa='5000', country='USA' where name='菜鸟教程';
+
+3.1
+delete
+delete from table_name where some_column=some_value;
+例子：delete from mydatabase where name='百度' and country='CN';
+
+
+4.1
+insert into
+第一种形式无需指定要插入数据的列名，只需提供被插入的值即可：
+insert into table_name values (value1,value2,value3,...);
+第二种形式需要指定列名及被插入的值：
+insert into table_name (column1,column2,column3,...) values (value1,value2,value3,...);
+例子：insert into Websites (name, url, alexa, country) values ('百度','https://www.baidu.com/','4','CN');
+
+在指定的列插入数据
+insert into mydatabase (name, url, country) values ('stackoverflow', 'http://stackoverflow.com/', 'IND');
+
+
+//高级
+select top(mysql)
+select * from mydatabase limit 5;
+select * from mydatabase where rownum<=5(oracle)
+
+
+like(略)
+select * from mydatabase where name like 'G%';
+    通配符（%，替代0个或多个字符,_替代一个字符,[charlist]字符列中的任何单一字符,[^charlist] 或 [!charlist] 不在字符列中的任何单一字符
+例子：select * from mydatabase where name regexp '^[GFs]';
+     select * from mydatabase whrere name regexp '^[A-H]';
+
+in
+例子：select * from mydatabase where name in ('Google','菜鸟教程');
+
+
+between
+例子：select * from mydatabase where alexa between 1 and 20;
+not between
+select * from mydatabase whrere alexa not between 1 and 20;
+
+带有 IN 的 BETWEEN 操作符实例
+select * from mydatabase where (alexa between 1 and 20) and not country in ('USA', 'IND');
+带有文本值的 BETWEEN 操作符实例
+SELECT * FROM Websites WHERE name BETWEEN 'A' AND 'H';
+带有文本值的 NOT BETWEEN 操作符实例
+SELECT * FROM Websites WHERE name NOT BETWEEN 'A' AND 'H';
+带有日期值的 BETWEEN 操作符实例
+SELECT * FROM access_log WHERE date BETWEEN '2016-05-10' AND '2016-05-14';
+
+
+sql别名
+SELECT column_name AS alias_name FROM table_name;
+例子：SELECT name AS n, country AS c FROM Websites;
+
+
+concat
+SELECT name, CONCAT(url, ', ', alexa, ', ', country) AS site_info
+FROM Websites;
+
+join
+不同的SQL JOIN
+例子：SELECT Websites.id, Websites.name, access_log.count, access_log.date
+   FROM Websites
+   INNER JOIN access_log
+   ON Websites.id=access_log.site_id;
+inner join  如果表中有至少一个匹配，则返回行
+left join   即使右表中没有匹配，也从左表返回所有的行
+right join  即使左表中没有匹配，也从右表返回所有的行
+full join   只要其中一个表中存在匹配，则返回行
+
+
+union
+//SQL UNION 操作符合并两个或多个 SELECT 语句的结果
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

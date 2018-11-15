@@ -4,17 +4,6 @@
 (function () {
   var zxEditor;
   var $query;
-  var $titleItems = null;
-  var summaryShow = false;
-  // 获取body元素
-  var $docBody;
-  // 封面图元素
-  var $coverPic;
-  // 摘要，导语栏子元素集（.placeholder, .input-hook）
-  var $summaryItems;
-  // 预览容器
-  var $previewWrapper;
-
   // 富文本对象
   var richText = (function () {
     var Fun = function () {
@@ -26,20 +15,10 @@
     Fun.prototype.init = function () {
       // 初始化富文本插件
       this.initZxEditor();
-      // 插件底部追加按钮
-      this.addFooterButtons();
-      // 封面图栏
-      this.handleCoverWrapper();
-      // 标题栏
-      this.handlePlaceholderInputWrapper(this.options.titleWrapper);
-      // 导语摘要栏
-      this.handlePlaceholderInputWrapper(this.options.summaryWrapper);
       // 初始化容器高度
       this.initHeight();
       // 初始化本地存储的数据
       this.initLocalData();
-      // 导语点击事件
-      this.introductionClick();
       // 初始化页面按钮的点击事件
       this.initPageButtonClick();
     };
@@ -60,95 +39,15 @@
       $query = zxEditor.query || function (selector, context) {
         return (context || document).querySelector(selector)
       };
-      // 获取body元素
-      $docBody = $query('body');
-      // 封面图元素
-      $coverPic = $query(this.options.coverPic);
-      // 预览容器
-      $previewWrapper = $query(this.options.previewWrapper);
-    };
-    // 追加按钮，未添加事件
-    Fun.prototype.addFooterButtons = function () {
-      var addFooterButtons = this.options.addFooterButtons;
-      addFooterButtons.forEach(function (footerButton) {
-        zxEditor.addFooterButton({
-          name: footerButton.name,
-          // 按钮外容器样式
-          class: footerButton.class,
-          // 按钮内i元素样式名
-          icon: footerButton.icon ? footerButton.icon : "",
-          // 需要注册的监听事件名
-          on: footerButton.on,
-        });
-      })
-    };
-    // 封面图
-    Fun.prototype.handleCoverWrapper = function () {
-      var imageParams = this.options.imageParams;
-      // 封面容器
-      var $cover = $query('.cover-wrapper .cover');
-      var $input = $query('.cover-wrapper input');
-      var $img = zxEditor.query('img', $cover);
-      // 点击封面容器处理
-      zxEditor.addEvent($cover, 'click', function (e) {
-        // var oldSrc = $img.src;
-        $input.click();
-      });
-      // 选中图片文件
-      zxEditor.addEvent($input, 'change', function (e) {
-        // 添加loading
-        zxEditor.dialog.loading('图片处理中...');
-        var files = this.files;
-        // 处理图片数据(file数据转base64,blobData)
-        zxEditor.filesToBase64(files, imageParams, function (err, res) {
-          zxEditor.dialog.removeLoading();
-          if (err) {
-            zxEditor.dialog.alert(err[0].message || '图片处理错误！')
-          }
-          if (res) {
-            $img.src = res[0].base64;
-            zxEditor.addClass('has-pic', $cover);
-          }
-        })
-      });
-    };
-    // 处理标题、摘要placeholder/input切换
-    Fun.prototype.handlePlaceholderInputWrapper = function (selector) {
-      var $wrapper = $query(selector);
-      var $items = zxEditor.queryAll('.item', $wrapper);
-      // 输入最大长度
-      var maxLength = 30;
-      if ($items.length === 0) return;
-      if (selector === '.title-wrapper') {
-        $titleItems = $items;
-      } else if (selector === '.summary-wrapper') {
-        $summaryItems = $items;
-        maxLength = 140;
-      }
-      zxEditor.addEvent($items[0], 'click', this._placeholderClickHandler, false);
-      zxEditor.addEvent($items[1], 'blur', this._inputHookHandler, false);
-      // 输入内容限制
-      zxEditor.addEvent($items[1], 'keyup', function (e) {
-        var text = this.innerText;
-        if (text && text.length >= maxLength) {
-          if (e.keyCode !== 8) {
-            e.preventDefault();
-          } else {
-            this.innerText = text.substr(0, maxLength);
-          }
-        }
-      })
     };
     // 初始化高度
     Fun.prototype.initHeight = function () {
       // 窗口高度
       var winHeight = window.innerHeight;
-      var headerHeight = 44;
       // 编辑器
       var $editorContent = zxEditor.$content;
       var contentTop = $editorContent.getBoundingClientRect().top;
       $editorContent.style.minHeight = winHeight - contentTop - zxEditor.toolbarHeight + 'px';
-      $previewWrapper.style.height = winHeight - headerHeight + 'px';
     };
     // 初始化本地数据,也可以从网上获取
     Fun.prototype.initLocalData = function () {
@@ -161,106 +60,25 @@
       else {
         data = zxEditor.storage.get('article');
       }
-
       if (data) {
-        if (data.cover) {
-          zxEditor.addClass('has-pic', $query('.cover'));
-          $coverPic.setAttribute('src', data.cover);
-        }
-        if (data.title) {
-          $titleItems[0].style.display = 'none';
-          $titleItems[1].style.display = '';
-          $titleItems[1].innerText = data.title;
-        }
-        if (data.summary) {
-          $summaryItems[1].innerText = data.summary;
-          if(data.summaryShow){
-            summaryShow = true;
-            $query('.summary-wrapper').style.display = '';
-            $summaryItems[0].style.display = 'none';
-            $summaryItems[1].style.display = '';
-          }
-        }
         zxEditor.setContent(data.content);
       }
     };
-    Fun.prototype.introductionClick = function () {
-      zxEditor.on('summary-button', function () {
-        summaryShow = !summaryShow;
-        $query('.summary-wrapper').style.display = summaryShow ? '' : 'none';
-      });
-    };
+
     Fun.prototype.initPageButtonClick = function () {
       const that = this;
-      // 预览按钮的点击事件
-      $(this.options.previewButton).on("click", function () {
-        that.handlePreviewClick();
-      });
       //  返回按钮的点击事件
       $(this.options.backButton).on("click", function () {
         that.handleBackClick();
-      });
-      // 继续编辑的点击事件
-      $(this.options.continueEditButton).on("click", function () {
-        that.handleBackPreviewClick();
       });
       // 完成的点击事件
       $(this.options.finishWorkButton).on("click", function () {
         that.handleSubmitClick();
       });
     };
-    // 预览
-    Fun.prototype.handlePreviewClick = function () {
-      // 获取文章数据
-      var data = this.getArticleData();
-      // 保存文章数据
-      zxEditor.storage.set('article', data);
-      if (!data) {
-        zxEditor.dialog.alert('还未添加任何内容！');
-        return;
-      }
-      // 判断内容是否完善
-      if (!data.cover) {
-        zxEditor.dialog.alert('请添加文章封面');
-        return
-      }
-      if (!data.title) {
-        zxEditor.dialog.alert('请添加文章标题');
-        return
-      }
-      if (!data.content || data.content === '<p><br></p>') {
-        zxEditor.dialog.alert('请添加文章内容');
-        return
-      }
-
-      // 将数据添加到预览容器中
-      $query('.preview-cover img', $previewWrapper).src = data.cover;
-      $query('.preview-title', $previewWrapper).innerText = data.title;
-      var $summay = $query('.preview-summary', $previewWrapper);
-      if (data.summary) {
-        // 显示摘要
-        $summay.style.display = '';
-        // 填充摘要(导语)内容
-        $summay.innerText = data.summary;
-      } else {
-        // 隐藏摘要
-        $summay.style.display = 'none';
-      }
-      // 填充正文内容
-      $query('.preveiw-content', $previewWrapper).innerHTML = data.content;
-      $previewWrapper.style.transform = 'translateX(0)';
-      // 禁止body滚动
-      zxEditor.lock($docBody);
-    };
     // 返回
     Fun.prototype.handleBackClick = function () {
       zxEditor.dialog.alert('点击了返回按钮');
-    };
-    // 点击继续编辑
-    Fun.prototype.handleBackPreviewClick = function () {
-      $previewWrapper.style.transform = 'translateX(100%)';
-      // 接触body滚动限制
-      zxEditor.unlock($docBody);
     };
     // 提交的点击
     Fun.prototype.handleSubmitClick = function () {
@@ -282,13 +100,10 @@
         if (base64Images.length) {
           data.content = zxEditor.getContent();
         }
-        // 填充预览正文内容
-        $query('.preveiw-content', $previewWrapper).innerHTML = data.content;
         // 需要提交的数据
         // 防止提交失败，再保存一次base64图片上传后的文章数据
         zxEditor.storage.set('article', data);
 
-        data.summaryShow = summaryShow;
         var response = that.getData("post", that.options.submitArticlePort, data);
 
         if (response.status === 0) {
@@ -323,38 +138,6 @@
       });
       return _response;
     };
-    // 点击标题、摘要placeholder处理程序
-    Fun.prototype._placeholderClickHandler = function (e) {
-      var $currentElm = e.currentTarget;
-      if (zxEditor.hasClass('placeholder', $currentElm)) {
-        this.style.display = 'none';
-        var $inputHook;
-        if ($currentElm === $titleItems[0]) {
-          $inputHook = $titleItems[1];
-        } else if ($currentElm === $summaryItems[0]) {
-          $inputHook = $summaryItems[1];
-        }
-        if (!$inputHook) return;
-        $inputHook.style.display = '';
-        $inputHook.focus();
-      }
-    }
-    // 点击标题、摘要输入框处理程序
-    Fun.prototype._inputHookHandler = function (e) {
-      var $currentElm = e.currentTarget;
-      var $placeholder;
-      if ($currentElm === $titleItems[1]) {
-        $placeholder = $titleItems[0];
-      } else if ($currentElm === $summaryItems[1]) {
-        $placeholder = $summaryItems[0];
-      }
-      if (!$placeholder) return;
-      var text = $currentElm.innerText;
-      if (!text) {
-        $placeholder.style.display = '';
-        $currentElm.style.display = 'none';
-      }
-    }
     // 数据处理，并提交数据处理
     Fun.prototype.uploadBase64Images = function (base64Images, callback) {
       const that = this;
@@ -420,35 +203,12 @@
      */
     Fun.prototype.getArticleData = function () {
       var data = {
-        cover: $coverPic.getAttribute('src'),
-        title: $titleItems[1].innerText,
-        summary: $summaryItems[1].innerText,
         // 获取正文内容
         content: zxEditor.getContent()
       }
-      return (!data.cover && !data.summary && !data.title && (!data.content || data.content === '<p><br></p>'))
+      return (!data.content || data.content === '<p><br></p>')
         ? null
         : data;
-    }
-
-    /**
-     * 点击标题、摘要输入框处理程序
-     * @private
-     */
-    Fun.prototype._inputHookHandler = function (e) {
-      var $currentElm = e.currentTarget;
-      var $placeholder;
-      if ($currentElm === $titleItems[1]) {
-        $placeholder = $titleItems[0];
-      } else if ($currentElm === $summaryItems[1]) {
-        $placeholder = $summaryItems[0];
-      }
-      if (!$placeholder) return;
-      var text = $currentElm.innerText;
-      if (!text) {
-        $placeholder.style.display = '';
-        $currentElm.style.display = 'none';
-      }
     }
     return Fun;
   })();
@@ -461,14 +221,6 @@
         // 编辑框左右边距
         padding: 13,
       },
-
-      // 图片裁剪的参数
-      imageParams: {
-        width: 750,
-        height: 422,
-        // 强制裁剪图片，包括gif
-        clip: true
-      },
       // 当前的文章的id
       articleId: "",
       // 上传图片的接口
@@ -477,40 +229,12 @@
       submitArticlePort: "/submitArticlePort",
       // 获取数据的接口
       getDataPort: "/getDataPort",
-
-
-      // 封面图元素
-      coverPic: ".cover-wrapper img",
-      // 标题栏容器
-      titleWrapper: ".title-wrapper",
-      // 导语摘要
-      summaryWrapper: ".summary-wrapper",
-      // 预览按钮
-      previewButton: ".preview-button",
       // 返回按钮
       backButton: ".back-button",
-      // 继续编辑按钮
-      continueEditButton: ".continue-edit",
       // 完成的按钮
       finishWorkButton: ".finish-work",
-      // 编辑容器
-      previewWrapper: ".article-preview-wrapper",
       // 插件的容器
       editorContainer: "#editorContainer",
-
-
-      // 末尾追加的按钮
-      addFooterButtons: [
-        {
-          name: 'summary',
-          // 按钮外容器样式
-          class: 'demo-summary-button',
-          // 按钮内i元素样式名
-          icon: '',
-          // 需要注册的监听事件名
-          on: 'summary-button'
-        },
-      ],
     };
     $.extend(options, arguments[0]);
     $(this).each(function (index, elem) {

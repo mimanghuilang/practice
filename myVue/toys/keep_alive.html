@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <keep-alive>
+        <component :is="currentView">
+            <!-- 非活动组件将被缓存！ -->
+        </component>
+    </keep-alive>
+</div>
+<script>
+    var Home = {
+        template: '<p>Welcome home!</p>'
+    };
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            currentView: Home
+        }
+    })
+</script>
+</body>
+</html>

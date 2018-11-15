@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>使用solt分发内容</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <game>
+        <p>{{ msg }}</p>
+        <h1 slot="k1">王者荣耀</h1>
+        <h2 slot="k2">王者荣耀</h2>
+    </game>
+</div>
+<script>
+
+    Vue.component('game', {
+        template: '<div> <h4>{{ msg }}</h4> <slot name="k1"></slot> <slot name="k2"></slot> <slot></slot> </div>',
+        data:function () {
+            return {msg:"背锅侠"}
+        }
+    });
+
+    new Vue({
+        el: '#app',
+        data: {msg:"游戏排行榜"},
+        methods: {}
+    });
+</script>
+</body>
+</html>

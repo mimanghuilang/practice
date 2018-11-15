@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+
+
+    <my-component
+            :foo="baz"
+            :bar="qux"
+            @event-a="doThis"
+            @event-b="doThat"
+    >
+        <img slot="icon" src="...">
+        <p slot="main-text">Hello!</p>
+    </my-component>
+</div>
+<script>
+    console.log("略");
+</script>
+</body>
+</html>

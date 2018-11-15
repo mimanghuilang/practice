@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>绑定行内</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <!--对象语法-->
+    <button class="haha" v-bind:style="{ color: color,height:height}">click Me</button>
+    <!--直接绑定-->
+    <button class="haha" v-bind:style="styleObject">click Me2</button>
+    <!--数组语法-->
+    <button class="haha" v-bind:style="[baseStyles, overridingStyles]">click Me3</button>
+    <!--略-->
+    <button class="haha" style="color: red" v-bind:style="[overridingStyles]">click Me4</button>
+    <!--多重值-->
+    <button :style="{ display: ['-webkit-box', '-ms-flexbox', 'flex'] }">click Me5</button>
+</div>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            color:"red",
+            height:"100px",
+            baseStyles: {
+                color: 'green',
+                fontSize: '30px'
+            },
+            overridingStyles: {
+                'font-weight': 'bold'
+            },
+            styleObject:{
+                color:"red",
+                height:"100px"
+            },
+            isActive: true,
+            danger:true,
+            activeClass: 'active',
+            errorClass: 'danger'
+        },
+        methods: {
+            click_me: function () {
+                this.disableValue = !this.disableValue;
+                alert("点我");
+            }
+        },
+        computed:{
+            classObject:function () {
+                return {active:true,danger:true}
+            }
+        }
+    });
+</script>
+</body>
+</html>

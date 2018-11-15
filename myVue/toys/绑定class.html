@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>绑定class</title>
+    <script src="../js/vue.js" type="text/javascript"></script>
+</head>
+<body>
+<style>
+    .active {
+        color: red;
+    }
+</style>
+<!--isActive为真的时候 class 为active-->
+<div id="app">
+    <button class="haha" v-bind:class="{ active: isActive,danger:danger}">click Me</button>
+    <button class="haha" v-bind:class="classObject">click Me2</button>
+    <!--数组语法-->
+    <button class="haha" v-bind:class="[activeClass, errorClass]">click Me3</button>
+    <!--混用-->
+    <button class="haha" v-bind:class="[{ active: isActive }, errorClass]">click Me4</button>
+</div>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            isActive: true,
+            danger:true,
+            activeClass: 'active',
+            errorClass: 'danger'
+        },
+        methods: {
+            click_me: function () {
+                this.disableValue = !this.disableValue;
+                alert("点我");
+            }
+        },
+        computed:{
+            classObject:function () {
+                return {active:true,danger:true}
+            }
+        }
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+<style>
+    /* 可以设置不同的进入和离开动画 */
+    /* 设置持续时间和动画函数 */
+    .slide-fade-enter-active {
+        transition: all .3s ease;
+    }
+    .slide-fade-leave-active {
+        transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+    }
+    .slide-fade-enter, .slide-fade-leave-active {
+        transform: translateX(10px);
+        opacity: 0;
+    }
+</style>
+<div id="example-1">
+    <button @click="show_sort_panel = !show_sort_panel">
+        Toggle render
+    </button>
+    <transition name="slide-fade">
+        <p v-if="show_sort_panel">hello</p>
+    </transition>
+</div>
+<script>
+    new Vue({
+        el: '#example-1',
+        data: {
+            show_sort_panel: true
+        }
+    })
+</script>
+</body>
+</html>

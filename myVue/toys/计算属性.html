@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>计算属性</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <div>
+        <p>{{ message.split('').reverse().join('') }}</p>
+        <p>Original message: "{{ message }}"</p>
+        <p>Computed reversed message: "{{ reversedMessage }}"</p>
+    </div>
+</div>
+<script>
+    //计算属性vs methods,计算属性能能监听数据的变化
+    var app = new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello World!',
+            rawHtml: "<h1>这里的世界很精彩！</h1>",
+            url:"http://www.baidu.com"
+        },
+        filters: {
+            capitalize: function (value) {
+                if (typeof value == "string") {
+                    return value + "(文字)";
+                }
+                else {
+                    return value + "(不是文字)";
+                }
+
+            }
+        },
+        methods:{
+            doSomething:function () {
+                alert("学习")
+            }
+        },
+        computed: {
+            // a computed getter
+            reversedMessage: function () {
+                // `this` points to the vm instance
+                return this.message.split('').reverse().join('')
+            }
+        }
+    });
+</script>
+</body>
+</html>

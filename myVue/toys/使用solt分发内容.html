@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>使用solt分发内容</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+<h1>单个solt</h1>
+<div id="app1">
+    <game1>
+        <h1>王者荣耀</h1>
+        <h3>王者荣耀</h3>
+    </game1>
+</div>
+<div id="app2">
+    <game2>
+        <h1>王者荣耀</h1>
+        <h3>王者荣耀</h3>
+    </game2>
+    <game2></game2>
+</div>
+<script>
+    Vue.component('game1', {
+        template: '<div> <h4>游戏</h4><hr/></div>'
+        // 技术上 data 的确是一个函数了，因此 Vue 不会警告，
+    });
+
+    Vue.component('game2', {
+        template: '<div> <h4>游戏</h4><slot>有没有游戏可以玩</slot></div>'
+        // 技术上 data 的确是一个函数了，因此 Vue 不会警告，
+    });
+
+    new Vue({
+        el: '#app1',
+        data: {},
+        methods: {}
+    });
+    new Vue({
+        el: '#app2',
+        data: {},
+        methods: {}
+    });
+</script>
+</body>
+</html>
