@@ -23,7 +23,7 @@
     }
 
 
-    extend(Author, Object);
+    extend(Author, Person);
     /**
      * 创建extend函数为了程序中所有的继承操作
      * subClass（子类）；superClass（父类）
