@@ -24,6 +24,7 @@ var f2 = debounce(function () {
     console.log(123)
 }, 1000, true)
 console.log('test2.1')
+console.log('test2.2')
 
 setInterval(() => {
     f2()
