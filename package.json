@@ -1,6 +1,6 @@
 {
   "name": "up-release",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "upRelease",
   "main": "index.js",
   "bin": {
