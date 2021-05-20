@@ -1,7 +1,8 @@
 {
-  "publishVersion": "1.0.0",
+  "publishVersion": "1.0.1",
   "onlyMaterRelease": true,
   "historyKeyWords": [
+    "【解决Bug】",
     "【新增功能】",
     "【修改功能】",
     "【删除功能】",
