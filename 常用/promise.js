@@ -8,16 +8,22 @@ function MyPromise(execute) {
     function resolve(res) {
         if(this.successBack){
             this.successBack(res)
-
-            // this.finallyBack()
-
+            if(this.status==='pending'){
+                this.status='end';
+                this.finallyBack()
+            }
         }
+        return this;
     }
     function reject(err) {
         if(this.failBack){
             this.failBack(err)
-            this.finallyBack()
+            if(this.status==='pending'){
+                this.status='end';
+                this.finallyBack()
+            }
         }
+        return this;
     }
     this.runMachine = function () {
         if(this.status==='noStart'){
