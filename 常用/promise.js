@@ -1,74 +1,53 @@
-// todo 实现链式调用
-function MyPromise(execute) {
-    this.successBack = ()=>{};
-    this.failBack = ()=>{};
-    this.finallyBack = ()=>{};
-    this.status = 'noStart'
-    this.error = null;
-    function resolve(res) {
-        if(this.successBack){
-            this.successBack(res)
-            if(this.status==='pending'){
-                this.status='end';
-                this.finallyBack()
-            }
-        }
-        return this;
-    }
-    function reject(err) {
-        if(this.failBack){
-            this.failBack(err)
-            if(this.status==='pending'){
-                this.status='end';
-                this.finallyBack()
-            }
-        }
-        return this;
-    }
-    this.runMachine = function () {
-        if(this.status==='noStart'){
-            this.status='pending'
-            setTimeout(()=>{
-                execute(resolve.bind(this),reject.bind(this))
-            },0)
-        }
-    }
+// https://blog.csdn.net/qq_22167989/article/details/81586105?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522162184942016780269868450%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=162184942016780269868450&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduend~default-1-81586105.first_rank_v2_pc_rank_v29&utm_term=Promise+%E6%89%8B%E5%86%99&spm=1018.2226.3001.4187
+function MyPromise(fn) {
+    var  state = 'pending',value = null, callbacks = [];
+    this.then = function (onFulfilled) {
+        return new MyPromise(function (resolve) {
+            handle({
+                onFulfilled:onFulfilled||null,
+                resolve
+            })
 
-    this.then = function (successBack) {
-        this.successBack = successBack
-        this.runMachine()
-        return this;
+        })
+    };
+    function handle(callback) {
+        if (state === 'pending') {
+            callbacks.push(callback);
+            return;
+        }
+        //如果then中没有传递任何东西
+        if(!callback.resolve) {
+            callback.resolve(value);
+            return;
+        }
+        var ret = callback.onFulfilled(value);
+        callback.resolve(ret);
+
     }
-    this.catch=function (failBack) {
-        this.failBack = failBack
-        this.runMachine()
-        return this;
+    function resolve(newValue) {
+        if(newValue && (typeof newValue==='object'||typeof newValue==='function')){
+            var then = newValue.then;
+            if(typeof then==='function'){
+                then.call(newValue,resolve)
+                return;
+            }
+        }
+        value = newValue;
+        state = 'fulfilled'
+        setTimeout(function () {
+            callbacks.forEach(function (callback) {
+                handle(callback);
+            });
+        }, 0);
     }
-    this.finally=function (finallyBack) {
-        this.finallyBack = finallyBack;
-    }
+    fn(resolve);
 }
-var haha = new MyPromise((resolve,reject)=>{
-    var haha = 1234;
-    resolve(haha)
+var haha = new MyPromise(resolve=>{resolve('success')}).then(res=>{
+    return new MyPromise(resolve=>{
+        setTimeout(()=>{
+            resolve(res+1)
+        },1000)
+    })
 }).then(res=>{
-    console.log(res,'res');
-}).catch(error=>{
-    console.log(error,'error')
-}).finally(()=>{
-    console.log('finally')
+    console.log(res)
 })
-
-// var haha = new Promise((resolve,reject)=>{
-//     resolve('123')
-// }).catch(()=>{console.log(234)})
-// var haha  = new MyPromise((resolve,reject)=>{
-//     resolve('123')
-// })
-// setTimeout(()=>{
-//     haha.then((res)=>{
-//         console.log(res,'res')
-//     })
-// },10000)
-// 链式调用呢
-Promise.then().then().then()
