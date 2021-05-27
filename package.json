@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "eslint":"eslint"
+    "eslint": "eslint"
   },
   "repository": {
     "type": "git",
@@ -24,9 +24,16 @@
     "lint-staged": "^11.0.0",
     "standard": "^16.0.3"
   },
+  "dependencies": {},
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
   "lint-staged": {
-    "*.{js,jsx,vue}": [
-      "eslint",
+    "*.{js,vue}": [
+      "prettier --write",
+      "vue-cli-service lint",
       "git add"
     ]
   }
