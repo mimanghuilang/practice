@@ -1,2 +1,2 @@
 const haha = '1234'
-console.log(gugu)
+console.log(haha)
