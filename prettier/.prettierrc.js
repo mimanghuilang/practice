@@ -1,6 +1,6 @@
 module.exports = {
     tabWidth: 2,
-    semi: true,
+    semi: false,
     endOfLine: "crlf",
     printWidth: 100,
   extends: ["prettier"],
