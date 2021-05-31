@@ -7,7 +7,7 @@ module.exports = {
     es2021: true
   },
   extends: [
-    'standard',
+    'standard'
   ],
   parserOptions: {
     ecmaVersion: 12
