@@ -13,7 +13,8 @@ module.exports = {
   },
   rules: {
     "prettier/prettier": ["error", {}, {
-        "usePrettierrc": true
+        "usePrettierrc": true,
+        "withNodeModules":false
     }]
   }
 }
