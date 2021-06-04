@@ -209,4 +209,9 @@ inheritPrototype(SubClass9,SuperClass9);
 
 
 
+// 问题
+// javascript  继承后为什么要修正constructor
+// https://blog.csdn.net/wyb_gg/article/details/52091109?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522162277335916780261963756%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.%2522%257D&request_id=162277335916780261963756&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_v2~rank_v29-1-52091109.first_rank_v2_pc_rank_v29&utm_term=%E7%BB%A7%E6%89%BF%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E4%BF%AE%E5%A4%8Dconstructor&spm=1018.2226.3001.4187
+// 防止修改父类
+
 
