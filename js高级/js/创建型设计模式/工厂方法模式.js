@@ -18,3 +18,5 @@ Factor.prototype = {
     }
 }
 const java = Factor('JAVA','haha')
+console.log(java)
+console.log(java instanceof Factor)
