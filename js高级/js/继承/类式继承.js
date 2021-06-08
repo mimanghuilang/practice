@@ -1,5 +1,5 @@
 /**
- * 类式继承
+ * 1、原型链继承
  * 缺点
  * 1、父类的共有属性如果别修改，其它的继承的子类实例也会改变
  * 2、无法向父类传参
@@ -25,13 +25,14 @@ console.log(sub)
 console.log(sub instanceof SubClass1)
 console.log(sub instanceof SuperClass1)
 console.log(sub instanceof Object)
-
 console.log("-------------------------")
 
+
 /**
- * 构造函数继承
+ * 2、构造继承
  * 1、解决了上面的如果共用属性被修改会影响其它的子类的问题
- * 2、解决了不能实现多继承的问题
+ * 2、解决了无法向父类传参的问题
+ * 3、可以实现多继承
  * 缺点：
  * 2、不能继承父类原型上的方法和属性
  */
@@ -46,7 +47,6 @@ SuperClass2.prototype.showBooks = function () {
 }
 function SubClass2(id) {
     SuperClass2.call(this,id)
-    this.age = 123
 }
 var instance2 = new SubClass2('haha')
 console.log(instance2)
@@ -56,19 +56,50 @@ console.log("-------------------------")
 
 /**
  * 实例继承
+ * 优点：不限制调用方式，不管是new 子类()还是子类(),返回的对象具有相同的效果
+ * 缺点：
+ * 1、实例是父类的实例，不是子类的实例
+ * 2、不支持多继承
  */
-function SuperClass8(name){
-    this.name= name
-}
-function SubClass8(){
-    
-}
-
-
-console.log("---------实例----------------")
+// function Cat(name){
+//     var instance = new Animal();
+//     instance.name = name || 'Tom';
+//     return instance;
+// }
+//
+// // Test Code
+// var cat = new Cat();
+// console.log(cat.name);
+// console.log(cat.sleep());
+// console.log(cat instanceof Animal); // true
+// console.log(cat instanceof Cat); // false
 
 /**
- * 组合继承
+ * 拷贝继承
+ * 特点：支持多继承
+ * 缺点：
+ * 效率较低，内存占用高（因为要拷贝父类的属性）
+ * 无法获取父类不可枚举的方法（不可枚举方法，不能使用for in 访问到）
+ */
+// function Cat(name){
+//     var animal = new Animal();
+//     for(var p in animal){
+//         Cat.prototype[p] = animal[p];
+//     }
+//     // 2020年10月10日21点36分：感谢 @baclt 的指出，如下实现修改了原型对象，会导致单个实例修改name，会影响所有实例的name值
+//     // Cat.prototype.name = name || 'Tom'; 错误的语句，下一句为正确的实现
+//     this.name = name || 'Tom';
+// }
+//
+// // Test Code
+// var cat = new Cat();
+// console.log(cat.name);
+// console.log(cat.sleep());
+// console.log(cat instanceof Animal); // false
+// console.log(cat instanceof Cat); // true
+
+/**
+ * 3、组合继承
  * 解决了可以继承原型上的属性和方法
  * 可以向父类传参
  * 修改的是自己的属性
@@ -87,6 +118,7 @@ function SubClass3(name,time) {
     this.time = time
 }
 SubClass3.prototype = new SuperClass3()
+SubClass3.prototype.constructor = SubClass3;
 SubClass3.prototype.getTime = function () {
     console.log(this.time)
 }
@@ -95,6 +127,12 @@ console.log(sub3)
 console.log(sub3 instanceof SubClass3)
 console.log(sub3 instanceof SuperClass3)
 console.log("-------------------------")
+
+
+
+
+
+
 
 
 /**
@@ -117,58 +155,63 @@ console.log("-------------------------")
 
 
 /**
- * 寄生式继承
- * 借用原型继承
+ * 寄生组合继承
  */
-// 原型式继承
-function inheritobject (obj) {
-  function F () {}
-  F.prototype = obj;
-  return new F();
+function SuperClass4(name) {
+    this.name = name;
+    this.books = ["html","css","javascript"]
 }
-/**
- * 寄生式继承
- * @type {{name: string, alikeBook: string[]}}
- */
-const book={
-  name:'js book',
-  alikeBook:['css book','html book']
+SuperClass4.prototype.getName = function () {
+    console.log(this.name);
 }
-function createBook (obj) {
-  var o =  inheritobject(obj);
-  o.getName = function () {
-    console.log(name)
-  }
-  return o;
+function SubClass4(name,age) {
+    SuperClass4.call(this,name)
+    this.age = age;
 }
 
-var xixi =createBook(book)
-console.log(xixi);
-console.log("-------------qw------------")
+(function () {
+    var Super = function () {}
+    Super.prototype = SuperClass4.prototype
+    SubClass4.prototype = new Super();
+})()
+SubClass4.prototype.constructor = SubClass4
+
 
 /**
- * 寄生组合式继承
- * 传递参数 subClass 子类
- * 传递参数 superClass 父类
+ * 寄生式继承
+ * 传递subclass子类
+ * 传递superclass 父类
  */
-function inheritPrototype(subClass,superClass) {
-    var p = inheritobject(superClass.prototype);
-    p.constructor = subClass;
-    subClass.prototype=p;
+// function inheritObject(o) {
+//     function F() {this.name = 1234}
+//     F.prototype = o;
+//     return new F()
+// }
+function inheritPrototype(subclass,superclass) {
+    var p = inheritObject(superclass.prototype)
+    p.constructor = subclass;
+    subclass.prototype = p;
 }
-var Animal = function () {
-  this.name = name || 'Animal';
-  this.sleep = function () {
-    console.log(`${this.name}正在睡觉`)
-  }
+function SuperClass9(name) {
+    this.name = name;
+    this.colors = ['red','blue','green']
 }
-Animal.prototype.eat=function (food) {
-  console.log(`${this.name}正在吃${food}`)
+SuperClass9.prototype.getName = function () {
+    console.log(this.name)
 }
-var Cat = function (name) {
-    Animal.call(this,name);
-  this.age = 18;
+// 单纯的继承实例
+function SubClass9(name,time) {
+    SuperClass9.call(this,name)
+    this.time  = time
 }
-inheritPrototype(Cat,Animal)
-var haha = new Cat('cat');
-console.log(haha)
+// 单纯的继承原型
+inheritPrototype(SubClass9,SuperClass9);
+
+
+
+// 问题
+// javascript  继承后为什么要修正constructor
+// https://blog.csdn.net/wyb_gg/article/details/52091109?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522162277335916780261963756%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.%2522%257D&request_id=162277335916780261963756&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_v2~rank_v29-1-52091109.first_rank_v2_pc_rank_v29&utm_term=%E7%BB%A7%E6%89%BF%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E4%BF%AE%E5%A4%8Dconstructor&spm=1018.2226.3001.4187
+// 防止修改父类
+
+
