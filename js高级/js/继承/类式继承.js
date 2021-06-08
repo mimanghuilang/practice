@@ -3,6 +3,7 @@
  * 缺点
  * 1、父类的共有属性如果别修改，其它的继承的子类实例也会改变
  * 2、无法向父类传参
+ * 3、无法实现多继承
  */
 // 父类
 function SuperClass1() {
@@ -30,6 +31,7 @@ console.log("-------------------------")
 /**
  * 构造函数继承
  * 1、解决了上面的如果共用属性被修改会影响其它的子类的问题
+ * 2、解决了不能实现多继承的问题
  * 缺点：
  * 2、不能继承父类原型上的方法和属性
  */
@@ -44,6 +46,7 @@ SuperClass2.prototype.showBooks = function () {
 }
 function SubClass2(id) {
     SuperClass2.call(this,id)
+    this.age = 123
 }
 var instance2 = new SubClass2('haha')
 console.log(instance2)
@@ -51,6 +54,18 @@ console.log(instance2 instanceof SubClass2);
 console.log(instance2 instanceof SuperClass2);
 console.log("-------------------------")
 
+/**
+ * 实例继承
+ */
+function SuperClass8(name){
+    this.name= name
+}
+function SubClass8(){
+    
+}
+
+
+console.log("---------实例----------------")
 
 /**
  * 组合继承
@@ -105,25 +120,55 @@ console.log("-------------------------")
  * 寄生式继承
  * 借用原型继承
  */
-function SuperClass4(name) {
-    this.name = name;
-    this.books = ["html","css","javascript"]
+// 原型式继承
+function inheritobject (obj) {
+  function F () {}
+  F.prototype = obj;
+  return new F();
 }
-SuperClass4.prototype.getName = function () {
-    console.log(this.name);
+/**
+ * 寄生式继承
+ * @type {{name: string, alikeBook: string[]}}
+ */
+const book={
+  name:'js book',
+  alikeBook:['css book','html book']
 }
-function SubClass4(name,age) {
-    SuperClass4.call(this,name)
-    this.age = age;
+function createBook (obj) {
+  var o =  inheritobject(obj);
+  o.getName = function () {
+    console.log(name)
+  }
+  return o;
 }
 
-(function () {
-    var Super = function () {}
-    Super.prototype = SuperClass4.prototype
-    SubClass4.prototype = new Super();
-})()
-SubClass4.prototype.constructor = SubClass4
+var xixi =createBook(book)
+console.log(xixi);
+console.log("-------------qw------------")
 
-
-
-
+/**
+ * 寄生组合式继承
+ * 传递参数 subClass 子类
+ * 传递参数 superClass 父类
+ */
+function inheritPrototype(subClass,superClass) {
+    var p = inheritobject(superClass.prototype);
+    p.constructor = subClass;
+    subClass.prototype=p;
+}
+var Animal = function () {
+  this.name = name || 'Animal';
+  this.sleep = function () {
+    console.log(`${this.name}正在睡觉`)
+  }
+}
+Animal.prototype.eat=function (food) {
+  console.log(`${this.name}正在吃${food}`)
+}
+var Cat = function (name) {
+    Animal.call(this,name);
+  this.age = 18;
+}
+inheritPrototype(Cat,Animal)
+var haha = new Cat('cat');
+console.log(haha)
