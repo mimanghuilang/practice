@@ -18,3 +18,64 @@
 * 保护代理,比如加入一些过滤条件
 * 虚拟代理(图片懒加载)
 * 缓存代理
+
+## 装饰者模式
+* 在不改变原对象的基础上，通过对其进行包装拓展（添加属性或者方法） 使原有对象可以满足用户更复杂需求
+注意：this被劫持的问题
+举例：
+```javascript
+var getEleById = document.getElementById;
+document.getElementById = function (id) {
+    console.log(1);
+    return getEleById(id);
+}
+document.getElementById('demo');
+```
+```javascript
+
+var getEleById = document.getElementById;
+document.getElementById = function (id) {
+    console.log(1);
+    return getEleById.call(document, id);
+}
+document.getElementById('demo');
+```
+
+### 桥接模式
+定义：在系统沿着多个维度变化的同时，又不增加其复杂度并已达到解耦
+优点：
+* 抽象和实现的分离。
+* 优秀的扩展能力。
+* 实现细节对客户透明。
+缺点：
+* 桥接模式的引入会增加系统的理解与设计难度，由于聚合关联关系建立在抽象层，要求开发者针对抽象进行设计与编程
+实例
+事件监听回调机制
+```javascript
+var btn = $("#button_id");
+//利用jq注册点击事件
+btn.click(bridgeHadler);
+//利用桥模式分开
+function bridgeHadler() {
+	sendReq();
+}
+	
+//后台数据业务逻辑
+function  sendReq(); {
+	alert('我发送了请求。。。。。');
+}		
+```
+
+### 组合模式
+又称部分-整体模式，将对象组合成树形结构以表示“部分整体”的层次结构
+实例：
+* 文件，文件夹
+
+### 享元模式
+享元模式是一种性能优化模式，其核心是运用共享技术来有效的支持大量细粒度的对象。如果系统中因为创建大量类似的对象而导致内存占用过高，那么享元模式就非常有用了。享元模式的目标是尽量减少共享对象的数量。
+重点：
+* 享元模式要求将对象的属性划分为内部状态和外部状态
+```
+1、内部状态存储于对象内部；内部状态可以被一些对象共享；内部状态独立于具体的场景，通常不会改变。
+2、外部状态取决于具体的场景，并根据场景而变化，外部状态不被共享。
+```
