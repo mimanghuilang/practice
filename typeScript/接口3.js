@@ -9,3 +9,4 @@ function createSquare(config) {
     return newSquare;
 }
 var mySquare = createSquare({ color: "black" });
+//# sourceMappingURL=接口3.js.map

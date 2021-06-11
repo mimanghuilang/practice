@@ -13,3 +13,4 @@ function greeter(person) {
 }
 var user2 = new Student("Jane", "M.", "User");
 document.body.innerHTML = greeter(user2);
+//# sourceMappingURL=类.js.map

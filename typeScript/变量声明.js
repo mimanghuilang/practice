@@ -67,3 +67,4 @@ console.log(sumMatrix([[1, 2, 3], [4, 5, 6]]));
 // let clone = { ...c };
 // clone.p; // ok
 // clone.m(); // error!
+//# sourceMappingURL=变量声明.js.map

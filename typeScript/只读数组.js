@@ -9,3 +9,4 @@ a = ro;
 // readonly vs const
 // 推荐作为变量用const,作为属性用readonly
 // 额外的属性检查
+//# sourceMappingURL=只读数组.js.map

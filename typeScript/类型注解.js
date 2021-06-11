@@ -4,3 +4,4 @@ function greeter(person) {
 }
 var user = [0, 1, 2];
 document.body.innerHTML = greeter("哈哈");
+//# sourceMappingURL=类型注解.js.map

@@ -71,3 +71,4 @@ var strLength = someValue.length;
 console.log(strLength);
 // 关于let
 // let 替换 var
+//# sourceMappingURL=基础类型.js.map
