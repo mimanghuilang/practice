@@ -1,74 +1,71 @@
-// 布尔
-var isDone = false;
+// 布尔值
+var isDonne = false;
 // 数字
-var decLiteral = 6;
+var deLiteral = 6;
+var hexLiteral = 0Xf00d;
+var binaryLiterral = 10;
+var octalLiteral = 484;
 // 字符串
-var namestr = "xixi";
+var personName = 'bob';
+personName = 'tom';
+var haiStr = "I'm " + personName;
 // 数组
-var list = [1, 2, 3, 5];
-var list2 = [1, 2, 3, 4, 5];
-// 元组 Tuple
-var x;
-x = ["hello", 10];
-// 当访问一个越界元素，会使用联合类型替代
-x[3] = "world";
-// console.log(x[5].toString());
-// x[6]=true;  会报错，boolean not string nor not number
-// 枚举
-// 默认情况下是从0开始为元素编号，也可以手动指定成员的数值
+// 第一种 在元素类型后面接上 []，表示由此类型元素组成的一个数组
+var list1 = [1, 2, 3];
+// 第二种 使用数组泛型，Array<元素类型>
+var list2 = [1, 2, 3];
+// 元组Tuple
+// 元组类型允许表示一个已知元素数量和类型的数组，各元素的类型不必相同
+var x = ['hello', 123];
+// 枚举 enum
 var Color;
 (function (Color) {
-    Color[Color["Red"] = 1] = "Red";
-    Color[Color["Green"] = 2] = "Green";
-    Color[Color["Blue"] = 3] = "Blue";
+    Color[Color["Red"] = 0] = "Red";
+    Color[Color["Green"] = 1] = "Green";
+    Color[Color["Blue"] = 2] = "Blue";
 })(Color || (Color = {}));
-var c = Color.Blue;
-console.log(Color);
+var c = Color.Red;
 console.log(c);
-// Any,不知道变量是什么
-// let notSure:any=4;
-// notSure="maybe a string instead";
-// notSure=false; // okay,definitely a boolean
-//  任意类型的检查
+console.log(Color);
+// Any 任何类型
 var notSure = 4;
-// notSure.ifItExists(); // okay, ifItExists might exist at runtime
-notSure.toFixed(); // okay, toFixed exists (but the compiler doesn't check)
-var prettySure = 4;
-// prettySure.toFixed(); // Error: Property 'toFixed' doesn't exist on type 'Object'.
-// Void
+console.log(notSure);
+var list = [1, true, 'free'];
+list[1] = 100;
+// void类型像是与any类型相反，它表示没有任何类型。 当一个函数没有返回值时，你通常会见到其返回值类型是 void：
 function warnUser() {
-    alert("this is my warning message");
+    console.log("this is my warning message");
 }
-// 声明一个void类型的变量没有什么用，因为只能赋值undefined或则null
+// 声明一个void类型的变量没有什么大用，因为你只能为它赋予undefined和null
 var unusable = undefined;
-// Null和Undefined
+// null 和 undefined
+// 默认情况下null和undefined是所有类型的子类型。 就是说你可以把 null和undefined赋值给number类型的变量。
+// 然而，当你指定了--strictNullChecks标记，null和undefined只能赋值给void和它们各自。 这能避免 很多常见的问题。 也许在某处你想传入一个 string或null或undefined，你可以使用联合类型string | null | undefined。 再次说明，稍后我们会介绍联合类型。
 var u = undefined;
 var n = null;
-// 默认情况 null 和 undefined是所有类型的子类型
-// 指定 --strictNullChecks null和undefined只能赋值给void和自己
-// Never
-// never是任何类型的子类型
+// never类型表示的是那些永不存在的值的类型。
+// never类型是任何类型的子类型，也可以赋值给任何类型；然而，没有类型是never的子类型或可以赋值给never类型（除了never本身之外）。 即使 any也不可以赋值给never。
+// 返回never的函数必须存在无法达到的终点
 function error(message) {
     throw new Error(message);
 }
-// 推断的返回值类型未never
+// 推断的返回值类型为never
 function fail() {
-    return error("Something failed");
+    return error('something failed');
 }
-// fail();
-// 返回never的函数必须存在无法到达的终点
-// function infiniteLoop():never {
-//     while (true){
-//
-//     }
-// }
+// 返回never的函数必须存在无法达到的终点
+function infiniteLoop() {
+    while (true) {
+    }
+}
+create({ prop: 0 });
+create(null);
 // 类型断言
-var someValue = "this is a string";
-// 尖括号
-// let strLength:number=(<string>someValue).length;
-// as
+// 类型断言有两种形式。 其一是“尖括号”语法：
+// 两种形式是等价的。 至于使用哪个大多数情况下是凭个人喜好；然而，当你在TypeScript里使用JSX时，只有 as语法断言是被允许的。
+var someValue = 'this is a string';
 var strLength = someValue.length;
-console.log(strLength);
-// 关于let
-// let 替换 var
+// 另一个为as语法：
+var someValue2 = "this is a string";
+var strLength2 = someValue2.length;
 //# sourceMappingURL=基础类型.js.map
