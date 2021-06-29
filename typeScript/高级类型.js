@@ -18,7 +18,6 @@
 //     left: Tree<T>;
 //     right: Tree<T>;
 // }
-
 // // 接口vs类型别名
 // type Alias = { num: number }
 // interface Interface {
@@ -26,7 +25,6 @@
 // }
 // declare function aliased(arg: Alias): Alias;
 // declare function interfaced(arg: Interface): Interface;
-
 // 交叉类型
 // 交叉类型是将多个类型合并为一个类型。
 // function extend<T, U>(first: T, second: U): T & U {
@@ -56,7 +54,6 @@
 // var jim = extend(new Person("Jim"), new ConsoleLogger());
 // var n = jim.name;
 // jim.log();
-
 // 联合类型
 /**
  * Takes a string and adds "padding" to the left.
@@ -74,8 +71,6 @@
 // }
 //
 // padLeft("Hello world", 4); // returns "    Hello world"
-
-
 // 类型保护与区分类型
 // let pet = getSmallPet();
 //
@@ -86,7 +81,6 @@
 // else if (pet.fly) {
 //     pet.fly();
 // }
-
 // class BasicCalculator {
 //     public constructor(protected value: number = 0) { }
 //     public currentValue(): number {
@@ -124,23 +118,14 @@
 //     .sin()
 //     .add(1)
 //     .currentValue();
-
 // 索引类型
-function pluck<T, K extends keyof T>(o: T, names: K[]): T[K][] {
-    return names.map(n => o[n]);
+function pluck(o, names) {
+    return names.map(function (n) { return o[n]; });
 }
-
-interface Person {
-    name: string;
-    age: number;
-}
-let person: Person = {
+var person = {
     name: 'Jarid',
     age: 35
 };
-let strings: string[] = pluck(person, ['name']); // ok, string[]
+var strings = pluck(person, ['name']); // ok, string[]
 console.log(strings);
-console.log(1234)
-
-
-
+//# sourceMappingURL=高级类型.js.map

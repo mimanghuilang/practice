@@ -1,3 +1,4 @@
+"use strict";
 // 泛型
 // function identity(arg: any): any {
 //     return arg;
@@ -53,4 +54,3 @@
 //     console.log(arg.length);  // Array has a .length, so no more error
 //     return arg;
 // }
-//# sourceMappingURL=泛型.js.map

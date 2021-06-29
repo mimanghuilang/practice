@@ -11,4 +11,3 @@ var Album = /** @class */ (function () {
     }());
     Album.AlbumLabel = AlbumLabel;
 })(Album || (Album = {}));
-//# sourceMappingURL=枚举.js.map
