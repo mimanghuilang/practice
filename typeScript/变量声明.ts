@@ -1,85 +1,71 @@
-// let 声明
-function sumMatrix(matrix: number[][]) {
-    let sum = 0;
-    for (let i = 0; i < matrix.length; i++) {
-        let currentRow = matrix[i];
-        for (let i = 0; i < currentRow.length; i++) {
-            sum += currentRow[i];
-        }
-    }
+// var 声明
+// 1、不能赋值不同类型的值
+// var hai ='hai'
+// hai=234 // 报错
 
-    return sum;
-}
-console.log(sumMatrix([[1,2,3],[4,5,6]]));
+// let 声明
+// 1、块作用域
+// 2、不能重复声明
+
+// const 声明
+// 1、不能重新赋值
+// 2、块级作用域
+// 3、不能增加属性
+// const kitty = {
+//     name: "Aurora",
+//     numLives: '123',
+// }
+
 
 // 解构
-// 数组解构
-// let input=[1,2];
-// let [first,second]=input;
-
-// let [first,...rest]=[1,2,3,4];
-// console.log(first);
-// console.log(rest);
+// 数组解构，对象解构
+const input = [1, 2];
+// let [first, second] = input; // 数组解构赋值
+// let xixi,haha;
+// [xixi,haha] = input;   // 数组解构赋值
+// [first, second] = [second,first] // 交换变量
+// -------
+// let [first, ...rest] = [1, 2, 3, 4];
+// console.log(first); // outputs 1
+// console.log(rest); // outputs [ 2, 3, 4 ]
+// -------
+// let [, second, , fourth] = [1, 2, 3, 4];
 
 // 对象解构
-// let o = {
-//     a: "foo",
-//     b: 12,
-//     c: "bar"
-// };
-// let { a, b } = o;
-
-// ({ a, b } = { a: "baz", b: 101 });
-
-
-// let { a, ...passthrough } = o;
-// let total = passthrough.b + passthrough.c.length;
-
-// 属性重命名
-// let { a: newName1, b: newName2 } = o;
-// 补充要指示类型
-// let {a, b}: {a: string, b: number} = o;
-
-// 默认值，可以让你在属性为undefined时使用缺省值
-// function keepWholeObject(wholeObject: { a: string, b?: number }) {
-//     let { a, b = 1001 } = wholeObject;
-//     console.log(a);
-//     console.log(b);
-// }
-// keepWholeObject({a:"121"});
+let obj = {
+    a: "foo",
+    b: 12,
+    c: "bar"
+};
+let haha2,xixi2;
+({ haha2, xixi2 } = { haha2: "baz", xixi2: 101 });
+// let { a, ...passthrough } = obj;
+// let {a, b}: {a: string, b: number} = obj;
 
 
-
-// 函数声明(解构也能用于函数声明)
+// 函数声明
 // type C = { a: string, b?: number }
 // function f({ a, b }: C): void {
-//     console.log(a)
-// }
-// f({a:"121"});
-
-// 通常情况下更多的是指定默认值，解构默认值有些棘手。 首先，你需要在默认值之前设置其格式
-// function f({ a, b } = { a: "", b: 0 }): void {
 //     // ...
-//     console.log(a);
-//     console.log(b);
 // }
-// f(); // ok, default to { a: "", b: 0 }
 
 // function f({ a, b = 0 } = { a: "" }): void {
 //     // ...
 // }
 // f({ a: "yes" }); // ok, default b = 0
-// f(); // ok, default to {a: ""}, which then defaults b = 0
-// f({}); // error, 'a' is required if you supply an argument
+
+// 展开运算符,略
+
+class C {
+    p = 12;
+    m() {
+    }
+}
 
 
-// 对象的展开还有其它一些意想不到的限制，展开一个对象实列时，会丢失其方法
-// class C {
-//     p = 12;
-//     m() {
-//     }
-// }
-// let c = new C();
-// let clone = { ...c };
+// 对象展开还有其它一些意想不到的限制。 首先，它仅包含对象 自身的可枚举属性。 大体上是说当你展开一个对象实例时，你会丢失其方法：
+let c = new C();
+let clone = { ...c };
+console.log(clone)
 // clone.p; // ok
 // clone.m(); // error!

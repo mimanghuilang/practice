@@ -3,19 +3,64 @@
   <component name="ChangeListManager">
     <list default="true" id="804f12e6-76bb-4077-acd3-4ae09dc6dd1d" name="Default" comment="add:">
       <change afterPath="$PROJECT_DIR$/.eslintignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.versionrc.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.stylelintignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.up366/.commitlintrc.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.up366/.eslintrc.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.up366/.husky/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.up366/.husky/commit-msg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.up366/.husky/pre-commit" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.up366/.lintstagedrc.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.up366/.stylelintrc.json" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/haha.js" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/test.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/upRelease/.commitlintrc.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/upRelease/.eslintrc.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/upRelease/.husky/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/upRelease/.husky/commit-msg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/upRelease/.husky/pre-commit" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/upRelease/.lintstagedrc.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../es6/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../es6/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../js高级/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../js高级/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../typeScript/readMe.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../typeScript/test.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../typeScript/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../typeScript/add.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../typeScript/add.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../typeScript/hello.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../typeScript/hello.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../typeScript/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../typeScript/study" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../typeScript/函数.js" beforeDir="false" afterPath="$PROJECT_DIR$/../typeScript/函数.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../typeScript/函数.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../typeScript/函数.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../typeScript/变量声明.js" beforeDir="false" afterPath="$PROJECT_DIR$/../typeScript/变量声明.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../typeScript/变量声明.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../typeScript/变量声明.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../typeScript/只读.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../typeScript/只读.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../typeScript/只读数组.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../typeScript/只读数组.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../typeScript/基础类型.js" beforeDir="false" afterPath="$PROJECT_DIR$/../typeScript/基础类型.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../typeScript/基础类型.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../typeScript/基础类型.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../typeScript/接口.js" beforeDir="false" afterPath="$PROJECT_DIR$/../typeScript/接口.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../typeScript/接口.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../typeScript/接口.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../typeScript/接口2.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../typeScript/接口2.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../typeScript/接口3.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../typeScript/接口3.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../typeScript/枚举.js" beforeDir="false" afterPath="$PROJECT_DIR$/../typeScript/枚举.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../typeScript/枚举.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../typeScript/枚举.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../typeScript/模块-others.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../typeScript/模块-其它库.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../typeScript/模块-场景.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../typeScript/模块-导出1.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../typeScript/模块-导出2.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../typeScript/模块-导出3.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../typeScript/模块-导出4.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../typeScript/模块-导出exports1.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../typeScript/模块-导出exports2.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../typeScript/泛型.js" beforeDir="false" afterPath="$PROJECT_DIR$/../typeScript/泛型.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../typeScript/泛型.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../typeScript/泛型.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../typeScript/类.js" beforeDir="false" afterPath="$PROJECT_DIR$/../typeScript/类.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../typeScript/类.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../typeScript/类.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../typeScript/类型推论.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../typeScript/类型推论.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../typeScript/类型注解.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../typeScript/类型注解.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../typeScript/解构.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../typeScript/高级类型.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../typeScript/高级类型.ts" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -72,13 +117,19 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="js-jscs-nodeInterpreter" value="D:\node\node.exe" />
     <property name="js.eslint.eslintPackage" value="" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../myVue" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.prettier" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.path.for.package.prettier" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.prettier" value="" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path" value="node" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\WebStorm 2019.2.3\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
   </component>
   <component name="RecentsManager">
@@ -184,18 +235,32 @@
       <workItem from="1513247715671" duration="262000" />
       <workItem from="1543218220314" duration="10000" />
       <workItem from="1624530865384" duration="817000" />
+      <workItem from="1624962318694" duration="2326000" />
+      <workItem from="1625016568314" duration="42000" />
+      <workItem from="1625016629846" duration="617000" />
+      <workItem from="1625031631985" duration="599000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+    <option name="exactExcludedFiles">
+      <list>
+        <option value="$PROJECT_DIR$/../typeScript/类.js" />
+        <option value="$PROJECT_DIR$/../typeScript/函数.js" />
+        <option value="$PROJECT_DIR$/../typeScript/泛型.js" />
+        <option value="$PROJECT_DIR$/../typeScript/枚举.js" />
+      </list>
+    </option>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
