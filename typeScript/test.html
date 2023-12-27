@@ -3,9 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <script src="./装饰器.js"></script>
+    <!-- <script src="./装饰器.js"></script>s -->
 </head>
 <body>
-<div id="haha">点我呀</div>
+<div id="haha" style="color: red;">点我呀</div>
+<script>
+    var haha = document.getElementById("haha");
+    console.log(haha.style.color);
+    // haha.style.color='red';
+</script>
+<style>
+    #haha{
+        height: 10px;
+        height: 40px;
+    }
+</style>
 </body>
 </html>
