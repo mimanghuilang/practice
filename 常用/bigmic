@@ -1,0 +1,9 @@
+// 宏任务微任务
+const sleep = (seconds) => new Promise(resolve => setTimeout(resolve, seconds))
+function bigMic(){
+    Promise.resolve(sleep(5000)).then(function(){
+        console.log("微任务")
+    });
+    console.log("外层下面")
+}
+bigMic();

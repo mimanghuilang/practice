@@ -1,0 +1,24 @@
+console.log("----sleep, delay---")
+const sleep = (seconds) => new Promise(resolve => setTimeout(resolve, seconds))
+async function goShopPing(){
+    console.log("开始处理，等我5秒关个闹钟")
+    await sleep(5000);
+    console.log("go Shoping ....")
+    return true;
+}
+goShopPing();
+
+// 延时执行
+function delay (func, seconds, ...args) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+        console.log("延迟一会儿")
+      Promise.resolve(func(...args)).then(resolve).catch(reject)
+    }, seconds)
+  })
+}
+async function delayShoping(){
+    const res = await delay(goShopPing, 5000);
+    console.log(res);
+}
+delayShoping()
