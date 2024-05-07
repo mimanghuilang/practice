@@ -32,11 +32,12 @@ var haha1 = f1.myCall({a:1,b:2},3,4)
  * @returns {*}
  */
 Function.prototype.myApply = function (ctx,arr) {
+    if(typeof this!=='function') throw TypeError();
     var obj = ctx||window;
     obj.fn = this;
     var res;
     if(!arr){
-        res = ctx.fn()
+        res = obj.fn()
     }else{
         var args = [];
         for (var i = 0, len = arr.length; i < len; i++) {
@@ -65,7 +66,7 @@ Function.prototype.myBind = function (ctx) {
     var Noop = function () {}
     var args = [].slice.call(arguments,1);
     var outFun = function(){
-        const bindArgs = [].slice(arguments);
+        const bindArgs = [].slice.call(arguments);
         return self.apply(obj,args.concat(bindArgs))
     }
     if(this.prototype){
@@ -74,8 +75,8 @@ Function.prototype.myBind = function (ctx) {
     outFun.prototype = new Noop();
     return outFun;
 }
-var f3 = function () {
-    return (this.a+this.b)
+var f3 = function (c,d) {
+    return (this.a+this.b+c+d)
 }
 var haha3 = f3.myBind({a:1,b:2})()
 console.log(haha3);
