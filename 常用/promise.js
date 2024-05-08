@@ -51,3 +51,25 @@ var haha = new MyPromise(resolve=>{resolve('success')}).then(res=>{
 }).then(res=>{
     console.log(res)
 })
+
+
+// 手写promise.all
+function pAll (_promises) {
+    return new Promise((resolve,reject)=>{
+        const result = []
+        const promises = Array.from(_promises);
+        let count = 0;
+        promises.forEach((item,itemIndex)=>{
+          item.then(res=> {
+            count++;
+            result[itemIndex] = res;
+            if(count===promises.length){
+                resolve(result);
+            }
+          })
+        })
+    })
+}
+
+const p1 = Promise.resolve("帅呆了");
+pAll([p1]).then(res=>console.log(res));
