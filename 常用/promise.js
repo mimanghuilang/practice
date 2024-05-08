@@ -17,7 +17,6 @@ function MyPromise(fn) {
         }
         //如果then中没有传递任何东西
         if(!callback.resolve) {
-            callback.resolve(value);
             return;
         }
         var ret = callback.onFulfilled(value);
